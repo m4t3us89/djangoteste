@@ -1,0 +1,38 @@
+#########Instalação 
+python 3.7 (Baixar no site, já vem com PIP e Virtual Env, porém é necessário atualizar)
+python -m pip install --upgrade pip
+
+criar virtual venv: python -m venv venv
+ativar virutal venv:  .\venv\Scripts\activate.bat (executar como administrador)
+instalar django com virtual env ativado: pip install django
+
+#########Comandos e configuração do projeto
+criar projeto (com virtual env ativado): django-admin startproject proj
+configurar settings.py: nome do banco, LANGUAGE_CODE = 'pt-br' TIME_ZONE = 'America/Sao_Paulo'
+
+instalar banco de dados: python manage.py migrate
+startar o servidor: python manage.py runserver
+
+criar o app: python manage.py startapp clientes
+apos isso adicionar o app no settings.py na array  INSTALLED_APPS  e criar o arquivo urls.py para gerenciar as urls
+
+criando banco de dados a partir das models (Toda vez q alterar ou adicionar uma model)
+python manage.py makemigrations após isso rodar python manage.py migrate
+
+#########Administração do projeto
+localhost:port/admin 
+usuario e senha a baixo  
+criar um superusuario do banco: python manage.py createsuperuser
+registrar um model no admin: ir no arquivo admin.py, importar o model(from .models import Model) e regitrar na funcao: admin.site.register(Model)
+
+
+
+#########Mais
+https://www.youtube.com/watch?v=-YlK0A8Goj8&t=1003s
+
+doc django 2.1
+https://docs.djangoproject.com/en/2.1/ref/templates/builtins/
+
+
+heroku
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Deployment

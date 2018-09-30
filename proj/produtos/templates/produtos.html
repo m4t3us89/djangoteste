@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Produtos</h1>
+    {% for produto in produtos %}
+        <li><a href="produto/{{produto.id}}">{{ produto.nome }}</a></li>
+    {% endfor %}
+
+    {% if produto %}
+    <span class="text-muted">Produto encontrado</span><br> Nome: {{ produto.nome }} <br> Descrição: {{ produto.descricao }}
+    {% endif %}
+{% endblock %}

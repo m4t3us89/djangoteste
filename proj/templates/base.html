@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Titulo</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <!--<link rel="stylesheet" href="{% static 'styles.css' %}">-->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+        <style>
+          input{
+            margin-top: 5px;
+          }
+          .footer{
+            position: fixed;
+            bottom: 0px;
+            left: 0;
+            width: 100%;
+          }
+        </style>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark"  style="margin-bottom: 5px;">
+                    <a class="navbar-brand" href="#">Django</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                      <div class="navbar-nav">
+                        <a class="nav-item nav-link active"  href="http://localhost:8000/">Produtos</a>
+                        <a class="nav-item nav-link active" href="http://localhost:8000/clientes">Clientes</a>
+                      </div>
+                    </div>
+            </nav>
+
+            <div class="container-fluid">        
+                {% if messages %}
+                    {% for message in messages %}
+                        <div  {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                            <a href="javascript: return false;" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %} 
+                {% if user.is_authenticated %}
+                    <h6 style="text-align: end; margin-bottom: -15px;">Logado como: {{user.username}} <a href="/accounts/logout/">Sair</a></h6>
+                {% else %}
+                     <h6 style="text-align: end; margin-bottom: -15px;">Você não está logado</h6>
+                {% endif %}     
+                {% block content %}{% endblock %}
+            </div>
+            
+             <!-- Footer -->
+             <footer class="page-footer font-small cyan darken-3" style="background-color: #B0C4DE; margin-top: 10px;">
+                    
+                        <!-- Footer Elements -->
+                        <div class="container">
+                    
+                        <!-- Grid row-->
+                        <div class="row">
+                    
+                            <!-- Grid column -->
+                            <div class="col-md-12 py-5" style="text-align: center;">
+                            <div class="mb-2 flex-center">
+                    
+                                <!-- Facebook -->
+                                <a class="fb-ic">
+                                <i class="fa fa-facebook fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                                </a>
+                                <!-- Twitter -->
+                                <a class="tw-ic">
+                                <i class="fa fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                                </a>
+                                <!-- Google +-->
+                                <a class="gplus-ic">
+                                <i class="fa fa-google-plus fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                                </a>
+                                <!--Linkedin -->
+                                <a class="li-ic">
+                                <i class="fa fa-linkedin fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                                </a>
+                                <!--Instagram-->
+                                <a class="ins-ic">
+                                <i class="fa fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                                </a>
+                                <!--Pinterest-->
+                                <a class="pin-ic">
+                                <i class="fa fa-pinterest fa-lg white-text fa-2x"> </i>
+                                </a>
+                            </div>
+                            </div>
+                            <!-- Grid column -->
+                    
+                        </div>
+                        <!-- Grid row-->
+                    
+                        </div>
+                        <!-- Footer Elements -->
+                    
+                        <!-- Copyright -->
+                        <!--<div class="footer-copyright text-center py-3" style="background-color: #778899;">
+                            © 2018 Copyright:
+                        <a href="https://mdbootstrap.com/bootstrap-tutorial/"> Django</a>-->
+                        </div>
+                        <!-- Copyright -->
+                    
+                    </footer>
+                    <!-- Footer -->
+     
+    </body>
+    {% block extra_scripts %}
+        <script>
+            $(document).ready( function () {
+                $('.close').click(function(){
+                    $('.alert').slideUp()
+                })
+
+                var disable_enable_scroll = function(){
+                    let doc = $(document).height();
+                    let win = $(window).height();
+
+                    if(doc > win){
+                        //console.log('Tem scroll');
+                    } else {
+                        //console.log('Não tem scroll');
+                        $('footer').addClass('footer')
+                    } 
+                }
+                disable_enable_scroll()
+            })        
+        </script>
+    {% endblock %}
+</html>
